@@ -3,7 +3,7 @@ from random import randint
 
 field_without_ships = [['0']*10 for _ in range(10)]
 filed_with_ships = field_without_ships
-field_with_hide_ships = [['o']*10 for _ in range(10)]
+field_with_hide_ships = [['.']*10 for _ in range(10)]
 
 ships_cords = []
 ships_dead_cords = []
