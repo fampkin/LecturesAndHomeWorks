@@ -1,11 +1,6 @@
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-fig = plt.figure()
-ax = fig.add_subplot(111)
-x = [0, 1, 3 ,4]
-y = [0, 2, 4 ,6]
-points = [[0, 0], [1, 2], [3, 4], [4 ,6]]
-# ax.set_xlim(10)
-# ax.set_ylim(10)
-ax.add_patch(patches.Polygon(points, fill = False))
-plt.show()
+for x in range(0, 2):
+    for y in range(0, 2):
+        for z in range(0, 2):
+            A = x <= ((y<=z) <= (y and z))
+            B = (x or (y <= z)) and (x != y)
+            print (x, y, z, A, B)
