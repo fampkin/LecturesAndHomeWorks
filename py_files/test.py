@@ -1,23 +1,11 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from sympy import *
+from csv_module import load_table, save_table
+from pickle_module import load_table as ld_tb, save_table as sv_tb
+from ops import Table
+from datetime import datetime
 
-target = 1
 
-r = abs(target)
-phi = np.angle(target)
-
-n = 8
-roots = [r ** (1 / 8) * np.exp(1j * (phi + 2 * np.pi * k) / n) for k in range(n)]
-
-x = [z.real for z in roots]
-y = [z.imag for z in roots]
-
-plt.figure(figsize=(6, 6))
-plt.axhline(0, color='black', linewidth=0.5, linestyle='-')
-plt.axvline(0, color='black', linewidth=0.5, linestyle='-')
-plt.scatter(x, y, color="red")
-plt.grid(color="gray", linestyle="-", linewidth=0.5)
-plt.xlabel("Re")
-plt.ylabel("Im")
-plt.show()
+data = load_table("py_files/test.csv")
+table_1 = Table(data["headers"], data["rows"])
+table_1.print_table()
+table_1.set_column_types({"id": int, "Name": str, "Age": float, "Gender": str, "Date": datetime}, by_number=False)
+print(table_1.get_column_types(by_number=True))
