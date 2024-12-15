@@ -7,7 +7,7 @@ class Chess():
     def __init__(self):
         self.field = Field()
         self.init_chessmans()
-        self.current_turn = 'white'  # Начинаем с белых
+        self.current_turn = 'white'
         self.field.show()
         self.steps = 0
 
@@ -63,9 +63,9 @@ class Chess():
         
 
     def chessman(self, letter, number):
-        for piece in self.field.chessmans_list:
-            if piece.pos['letter'] == letter and piece.pos['number'] == number - 1:
-                return piece
+        for chm in self.field.chessmans_list:
+            if chm.pos.get('letter') == letter and chm.pos.get('number') == number - 1:
+                return chm
         return None
 
 if __name__ == '__main__':

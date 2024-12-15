@@ -99,44 +99,38 @@ class Pawn():
             diff_numbers = index_future_number - index_current_number
 
             if self.color == 'white':
-                valid_move = (
+                return (
                     diff_letters == 0 and
                     diff_numbers == 1 and
                     self.field.check_place(future_pos)
-                )
-                valid_attack = (
+                ) or (
                     diff_letters == 1 and
                     diff_numbers == 1 and
                     self.field.check_enemy(self.color, future_pos)
-                )
-                valid_double_move = (
+                ) or (
                     diff_letters == 0 and
                     diff_numbers == 2 and
                     current_number == 1 and
                     self.field.check_place({'letter': current_letter, 'number': current_number + 1}) and
                     self.field.check_place(future_pos)
                 )
-                return valid_move or valid_attack or valid_double_move
 
             elif self.color == 'black':
-                valid_move = (
+                return (
                     diff_letters == 0 and
                     diff_numbers == -1 and
                     self.field.check_place(future_pos)
-                )
-                valid_attack = (
+                ) or  (
                     diff_letters == 1 and
                     diff_numbers == -1 and
                     self.field.check_enemy(self.color, future_pos)
-                )
-                valid_double_move = (
+                ) or (
                     diff_letters == 0 and
                     diff_numbers == -2 and
                     current_number == 6 and
                     self.field.check_place({'letter': current_letter, 'number': current_number - 1}) and
                     self.field.check_place(future_pos)
                 )
-                return valid_move or valid_attack or valid_double_move 
         except Exception as e:
             print(f'Error with checking step for Pawn {self.color}: {e}')
             return False
