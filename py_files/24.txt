@@ -1,0 +1,3 @@
+apple,2.5
+banana,1.2
+chocolate,3.0
