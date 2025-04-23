@@ -1,11 +1,11 @@
-from csv_module import load_table, save_table
-from pickle_module import load_table as ld_tb, save_table as sv_tb
-from ops import Table
-from datetime import datetime
+import barcode
+from barcode.writer import ImageWriter
 
+# Генерируем штрих-код
+ean = barcode.get("ean13", "123456789012", writer=ImageWriter())
+filename = ean.save("barcode")  # сохраняем как PNG
 
-data = load_table("py_files/test.csv")
-table_1 = Table(data["headers"], data["rows"])
-table_1.print_table()
-table_1.set_column_types({"id": int, "Name": str, "Age": float, "Gender": str, "Date": datetime}, by_number=False)
-print(table_1.get_column_types(by_number=True))
+# Вставляем штрих-код в чек
+barcode_img = Image.open(filename + ".png")
+image.paste(barcode_img, (50, 200))
+image.save("check_with_barcode.png")
