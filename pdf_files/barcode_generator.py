@@ -1,30 +1,24 @@
-from barcode import Code128
+import barcode
 from barcode.writer import ImageWriter
-import os
+from io import BytesIO
 
-def generate_barcode(data, filename):
-    """
-    Generate a Code128 barcode from text/URL and save it as an image.
-    
-    Args:
-        data (str): Text or URL to encode in the barcode
-        filename (str): Name of the output file (without extension)
-    """
-    # Create the barcode object
-    barcode = Code128(data, writer=ImageWriter(format='PNG'))
-    
-    # Save the barcode as an image
-    barcode.save(filename)
+Code128 = barcode.get_barcode_class('Code128')
 
-if __name__ == "__main__":
-    # Example usage
-    url = "https://example.com"  # Replace with your URL
-    filename = "barcode"
-    
-    # Create output directory if it doesn't exist
-    if not os.path.exists("barcodes"):
-        os.makedirs("barcodes")
-    
-    # Generate and save the barcode
-    generate_barcode(url, os.path.join("barcodes", filename))
-    print(f"Barcode generated and saved as {filename}.png in the barcodes directory") 
+options = dict(
+    module_width=0.4,  # Controls the width of each bar
+    module_height=8.0,  # Controls the height of the barcode
+    quiet_zone=1.0,    # Reduced quiet zone
+    write_text=True,
+    text_distance=5,
+    font_path='./merchant-copy.ttf',
+    font_size=15,
+    background='white',
+    foreground='black',
+    # center_text=True,
+    format='PNG'
+)
+
+mbr = Code128('nT114137DH11319M674ATDMLn', writer=ImageWriter())
+
+fullname = mbr.save('code128_barcode', options)
+print(f"Saved barcode to: {fullname}")
